@@ -67,3 +67,6 @@ npm run dev
 4. open the aplication in the browser:
 
 http://localhost:5173
+
+5. Live Demo
+https://react-1k-data.vercel.app/
