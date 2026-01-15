@@ -1,16 +1,69 @@
-# React + Vite
+# React JS Developer Assessment – The 1K Data Challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+This project is a React application built to fetch, process, and visualize a dataset containing more than 1,000 data points.  
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The application displays 60 days of hourly weather data (~1464 points) in a single chart, rendered all at once without lazy loading.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Data Source
+- **API:** Open-Meteo (Archive API)
+- **Data type:** Historical hourly temperature data
+- **Range:** Last 60 days
+- **Volume:** 1464 data points
 
-## Expanding the ESLint configuration
+The Open-Meteo Archive API was chosen because it provides free, reliable historical data and allows dynamic date ranges.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Rendering Strategy
+- **Library:** Recharts (SVG-based charting library for React)
+- All data points are loaded into memory at once and passed directly to the chart.
+- SVG rendering was intentionally chosen to clearly expose rendering and interaction costs with a large dataset.
+
+---
+
+## Performance Considerations
+- Data transformation is handled using "useMemo" to avoid unnecessary recalculations on re-renders.
+- Array methods (map) are used efficiently to transform raw API data into chart-ready data.
+- Chart dots are disabled to reduce the number of rendered SVG nodes.
+- ResponsiveContainer is used to ensure efficient re-rendering on window resize.
+
+---
+
+## Interaction
+- Tooltip interaction remains responsive with all 1,000+ points rendered.
+- Hover behavior follows the cursor smoothly without noticeable lag.
+- The chart resizes efficiently when the browser window changes size.
+
+---
+
+## Tech Stack
+- React 18
+- Vite
+- JavaScript
+- Recharts
+
+---
+
+## Running the Project Locally
+
+1. Clone the repository:
+```bash
+git clone https://github.com/JossPS/React_1k_data.git
+```
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Start de server:
+```bash
+npm run dev
+```
+
+4. open the aplication in the browser:
+
+http://localhost:5173
